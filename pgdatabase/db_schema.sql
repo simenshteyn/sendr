@@ -1,0 +1,1 @@
+-- Schema for content. Diagram at: https://dbdiagram.io/d/6155785e825b5b01461a4121
