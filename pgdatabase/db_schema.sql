@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS content.key_status (
 CREATE TABLE IF NOT EXISTS content.campaigns (
     campaign_id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
     campaign_name       text        NOT NULL,
-    campaing_type       content.campaign_type
-                                NOT NULL DEFAULT 'single',
+    campaign_type       content.campaign_type
+                                    NOT NULL DEFAULT 'single',
     start_time          timestamp with time zone
 
 );
