@@ -11,8 +11,15 @@ dsl = {'dbname': config.pg_dbname,
        'port': config.pg_port}
 
 
-@pytest.fixture(scope="session")
-def pg_cursor():
+@pytest.fixture(scope='session')
+def pg_conn():
     pg_conn = psycopg2.connect(**dsl, cursor_factory=DictCursor)
     yield pg_conn
     pg_conn.close()
+
+
+@pytest.fixture
+def pg_curs(pg_conn):
+    pg_curs = pg_conn.cursor()
+    yield pg_curs
+    pg_curs.close()
