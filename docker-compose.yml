@@ -1,0 +1,36 @@
+version: '3.9'
+
+volumes:
+  postgres_data:
+
+services:
+  pg_db:
+    container_name: pg_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    build:
+      context: .
+      dockerfile: ./pgdatabase/Dockerfile
+    expose:
+      - ${POSTGRES_PORT}
+    healthcheck:
+      test: ["CMD-SHELL", "su postgres", "&&", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  unit_tests:
+    container_name: unit_tests
+    env_file:
+      - ./.env
+    build:
+      context: .
+      dockerfile: tests/unit/Dockerfile
+    command: >
+      sh -c "pytest /app/tests/unit/src -s -v"
+    depends_on:
+      pg_db:
+        condition: service_healthy
