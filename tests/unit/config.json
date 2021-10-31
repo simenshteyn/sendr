@@ -1,7 +1,0 @@
-{
-  "pg_host": "pg_db",
-  "pg_port": 5432,
-  "pg_dbname": "sendrapp",
-  "pg_user": "postgres",
-  "pg_pass": "sendrpassword"
-}

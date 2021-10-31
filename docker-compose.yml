@@ -24,6 +24,8 @@ services:
 
   unit_tests:
     container_name: unit_tests
+    env_file:
+      - ./.env
     build:
       context: .
       dockerfile: tests/unit/Dockerfile
